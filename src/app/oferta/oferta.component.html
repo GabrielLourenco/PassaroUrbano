@@ -1,0 +1,61 @@
+<div class="container">
+  <!-- Como os dados chegam de forma assíncrona, é necessário ter o *ngIf para não
+       renderizar o objeto undefined -->
+  <div class="oferta" *ngIf="oferta !== undefined">
+
+    <div class="row">
+      <div class="col">
+        <h4>{{ oferta.titulo }} - {{ oferta.descricao_oferta }}</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="img_capa">
+          <img [src]="oferta.imagens[0].url" />
+        </div>
+
+        <div class="thumbnails">
+          <img *ngFor="let img of oferta.imagens" [src]="img.url" />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col text-center">
+            <p>Por apenas</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col text-center">
+            <h1>{{ oferta.valor }}</h1>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col text-center">
+            <button type="button" class="btn btn-warning btn-lg">Adicionar ao carrinho</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="row navegacao">
+    <div class="col">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" routerLink="como-usar" data-toggle="tab" role="tab" aria-selected="true">Como usar</a>
+          <a class="nav-item nav-link" routerLink="onde-fica" data-toggle="tab" role="tab">Onde fica</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

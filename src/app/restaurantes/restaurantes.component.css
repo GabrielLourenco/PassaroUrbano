@@ -1,0 +1,9 @@
+img {
+    border-radius: 5px;
+    width: 320px;
+    height: 200px
+}
+
+.container {
+  padding: 0 25px 25px; 
+}
