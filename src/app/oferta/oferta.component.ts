@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { Oferta } from '../shared/oferta.model'
-import { OfertasService } from '../services/ofertas.service'
+import { ActivatedRoute, Params } from "@angular/router";
+import { Oferta } from '../shared/oferta.model';
+import { OfertasService } from '../services/ofertas.service';
 
 @Component({
   selector: 'app-oferta',
@@ -19,8 +19,13 @@ export class OfertaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.ofertasServices.getOfertaPorId(this.route.snapshot.params.id)
+    //snapshot não funciona quando se já está na rota.
+    // this.ofertasServices.getOfertaPorId(this.route.snapshot.params.id)
+    // .then( (oferta: Oferta) => this.oferta = oferta );
+    this.route.params.subscribe((params: Params) => {
+      this.ofertasServices.getOfertaPorId(params.id)
       .then( (oferta: Oferta) => this.oferta = oferta );
+    })
   }
 
 }

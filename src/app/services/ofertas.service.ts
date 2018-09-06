@@ -1,8 +1,12 @@
-import { Http } from '@angular/http'
+import { Http, Response } from '@angular/http'
 import { Injectable } from '@angular/core'
 
 // lib para converter observable para promise
 import 'rxjs/add/operator/toPromise'
+
+import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/retry'
 
 import { URL_OFERTAS, URL_COMO_USAR, URL_ONDE_FICA } from '../app.api'
 
@@ -26,30 +30,36 @@ export class OfertasService {
   public getOfertas(): Promise<Oferta[]> {
     return this.http.get(`${URL_OFERTAS}?destaque=true`)
       .toPromise()
-      .then( (resposta: any) => resposta.json() )
+      .then( (resposta: Response) => resposta.json() )
   }
 
   public getOfertasPorCategoria(categoria: string) : Promise<Oferta[]> {
     return this.http.get(`${URL_OFERTAS}?categoria=${categoria}`)
       .toPromise()
-      .then( resposta => resposta.json() )
+      .then( (resposta: Response) => resposta.json() )
   }
 
   public getOfertaPorId(id: number): Promise<Oferta> {
     return this.http.get(`${URL_OFERTAS}?id=${id}`)
       .toPromise()
-      .then( resposta => { return resposta.json()[0] } )
+      .then( (resposta: Response) => { return resposta.json()[0] } )
   }
 
   public getComoUsarOfertaPorId(id: number): Promise<string> {
     return this.http.get(`${URL_COMO_USAR}?id=${id}`)
       .toPromise()
-      .then( resposta => resposta.json()[0].descricao )
+      .then( (resposta: Response) => resposta.json()[0].descricao )
   }
 
   public getOndeFicaOfertaPorId(id: number): Promise<string> {
     return this.http.get(`${URL_ONDE_FICA}?id=${id}`)
       .toPromise()
-      .then( resposta => resposta.json()[0].descricao )
+      .then( (resposta: Response) => resposta.json()[0].descricao )
+  }
+
+  public pesquisaOfertas(termo: string): Observable<Oferta[]> {
+    return this.http.get(`${URL_OFERTAS}?descricao_oferta_like=${termo}`)
+      .retry(5) //efetuar tentativas de novas conexões
+      .map( (resposta: Response) => resposta.json() )
   }
 }
