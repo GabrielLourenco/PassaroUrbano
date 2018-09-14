@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="ordem-compra" *ngIf="idPedidoCompra === undefined">
-    <form novalidate>
+    <form novalidate #formulario="ngForm" (ngSubmit)="confirmaCompra(formulario)">
 
       <h5>Sua Compra</h5>
       <hr />
@@ -63,28 +63,29 @@
       </div>
       <br />
 
-
       <h5>Dados de entrega</h5>
       <hr />
 
       <div class="form-row">
 
         <div class="form-group col-md-6">
-          <input type="text" class="form-control {{ endereco.pristine ? '' : (endereco.valid ? 'is-valid' : 'is-invalid') }}" placeholder="Endereço"
-            autocomplete="off" minlength="5" [value]="endereco.value" #inputEnd (input)="atualizaEndereco(inputEnd.value)" required>
+          <input type="text" class="form-control" placeholder="Endereço"
+            [ngClass]="{'is-valid': iEndereco.valid && iEndereco.touched, 'is-invalid': iEndereco.invalid && iEndereco.touched}"
+            autocomplete="off" minlength="5" name="endereco" ngModel #iEndereco="ngModel" required>
           <div class="invalid-feedback">Endereço inválido</div>
         </div>
 
         <div class="form-group col-md-2">
-          <input type="text" class="form-control {{ numero.pristine ? '' : (numero.valid ? 'is-valid' : 'is-invalid') }}" placeholder="Número"
-            autocomplete="off" minlength="1" [value]="numero.value"  #inputNum (input)="atualizaNumero(inputNum.value)" required>
-          <div class="valid-feedback">Ok</div>
+          <input type="text" class="form-control" placeholder="Número"
+            [ngClass]="{'is-valid': iNumero.valid && iNumero.touched, 'is-invalid': iNumero.invalid && iNumero.touched}"
+            autocomplete="off" minlength="1" name="numero" ngModel #iNumero="ngModel" required>
+          <div class="invalid-feedback">Número inválido</div>
           <!-- <small class="form-text text-muted">Ok</small> -->
         </div>
 
         <div class="form-group col-md-4">
-          <input type="text" class="form-control {{ complemento.pristine ? '' : (complemento.valid ? 'is-valid' : '') }}" placeholder="Complemento"
-            autocomplete="off" #inputComp (input)="atualizaComplemento(inputComp.value)" [value]="complemento.value">
+          <input type="text" class="form-control" placeholder="Complemento"
+            autocomplete="off" name="complemento" ngModel>
         </div>
 
       </div>
@@ -96,10 +97,12 @@
       <div class="form-row">
 
         <div class="form-group col-md-3">
-          <select class="form-control {{ formaPagamento.pristine ? '' : (formaPagamento.valid ? 'is-valid' : 'is-invalid') }}" #selectFormaPagto (change)="atualizaFormaPagto(selectFormaPagto.value)">
+          <select class="form-control" name="pagamento" ngModel #iPagamento="ngModel"
+            [ngClass]="{'is-valid': iPagamento.valid && iPagamento.touched, 'is-invalid': iPagamento.invalid && iPagamento.touched}"
+            required>
             <option value="">Selecione uma opção</option>
-            <option value="dinheiro" selected="{{ formaPagamento.value == 'dinheiro' ? 'selected' : '' }}">Dinheiro</option>
-            <option value="debito" selected="{{ formaPagamento.value == 'debito' ? 'selected' : '' }}">Débito</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="debito">Débito</option>
           </select>
 
           <div class="invalid-feedback">Selecione uma forma de pagamento</div>
@@ -107,12 +110,10 @@
       </div>
 
       <hr />
-      <button type="button" class="btn btn-primary btn-lg"
-        [disabled]="!(formaPagamento.valid && numero.valid && endereco.valid)"
-        (click)="confirmarCompra()">Confirmar compra</button>
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="formulario.invalid">Confirmar compra</button>
     </form>
   </div>
   <div class="ordem-compra" *ngIf="idPedidoCompra !== undefined">
-    <app-ordem-compra-sucesso [idPedidoCompra]="idPedidoCompra"></app-ordem-compra-sucesso>
+    <app-ordem-compra-sucesso [idPedidoCompra]=idPedidoCompra></app-ordem-compra-sucesso>
   </div>
 </div>
