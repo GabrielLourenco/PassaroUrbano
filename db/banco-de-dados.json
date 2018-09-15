@@ -234,6 +234,13 @@
       "complemento": "",
       "formaPagamento": "dinheiro",
       "id": 7
+    },
+    {
+      "endereco": "Rua tito pereira",
+      "numero": "987",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 8
     }
   ]
 }

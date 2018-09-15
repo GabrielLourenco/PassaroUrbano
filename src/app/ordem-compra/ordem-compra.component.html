@@ -1,12 +1,12 @@
 
 <div class="container">
   <div class="ordem-compra" *ngIf="idPedidoCompra === undefined">
-    <form novalidate #formulario="ngForm" (ngSubmit)="confirmaCompra(formulario)">
+    <form novalidate [formGroup]="formulario" (ngSubmit)="confirmaCompra()">
 
       <h5>Sua Compra</h5>
       <hr />
 
-      <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+      <div class="form-row ordem-box">
         <div class="form-group col-sm-1">
           <img src="/assets/ofertas/1/img1.jpg" class="img-fluid">
         </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+      <div class="form-row ordem-box">
         <div class="form-group col-sm-1">
           <img src="/assets/ofertas/4/img1.jpg" class="img-fluid">
         </div>
@@ -70,22 +70,22 @@
 
         <div class="form-group col-md-6">
           <input type="text" class="form-control" placeholder="Endereço"
-            [ngClass]="{'is-valid': iEndereco.valid && iEndereco.touched, 'is-invalid': iEndereco.invalid && iEndereco.touched}"
-            autocomplete="off" minlength="5" name="endereco" ngModel #iEndereco="ngModel" required>
+            [ngClass]="{'is-valid': formulario.get('endereco').valid && formulario.get('endereco').touched, 'is-invalid': formulario.get('endereco').invalid && formulario.get('endereco').touched}"
+            autocomplete="off" formControlName="endereco">
           <div class="invalid-feedback">Endereço inválido</div>
         </div>
 
         <div class="form-group col-md-2">
           <input type="text" class="form-control" placeholder="Número"
-            [ngClass]="{'is-valid': iNumero.valid && iNumero.touched, 'is-invalid': iNumero.invalid && iNumero.touched}"
-            autocomplete="off" minlength="1" name="numero" ngModel #iNumero="ngModel" required>
+            [ngClass]="{'is-valid': formulario.get('numero').valid && formulario.get('numero').touched, 'is-invalid': formulario.get('numero').invalid && formulario.get('numero').touched}"
+            autocomplete="off" formControlName="numero">
           <div class="invalid-feedback">Número inválido</div>
           <!-- <small class="form-text text-muted">Ok</small> -->
         </div>
 
         <div class="form-group col-md-4">
           <input type="text" class="form-control" placeholder="Complemento"
-            autocomplete="off" name="complemento" ngModel>
+            autocomplete="off" formControlName="complemento">
         </div>
 
       </div>
@@ -97,9 +97,9 @@
       <div class="form-row">
 
         <div class="form-group col-md-3">
-          <select class="form-control" name="pagamento" ngModel #iPagamento="ngModel"
-            [ngClass]="{'is-valid': iPagamento.valid && iPagamento.touched, 'is-invalid': iPagamento.invalid && iPagamento.touched}"
-            required>
+          <select class="form-control" formControlName="pagamento"
+            [ngClass]="{'is-valid': formulario.get('pagamento').valid && formulario.get('pagamento').touched, 'is-invalid': formulario.get('pagamento').invalid && formulario.get('pagamento').touched}"
+          >
             <option value="">Selecione uma opção</option>
             <option value="dinheiro">Dinheiro</option>
             <option value="debito">Débito</option>

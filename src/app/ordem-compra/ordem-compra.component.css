@@ -1,3 +1,8 @@
 div.ordem-compra {
   padding: 50px 0 150px;
 }
+.ordem-box {
+  background: #FAFAFA;
+  padding: 20px;
+  border-bottom: solid 1px #F0F0F0;
+}

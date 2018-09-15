@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms'
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrdemCompraService } from '../services/ordem-compra.service'
 import { Pedido } from '../shared/pedido.model'
 
@@ -11,10 +11,17 @@ import { Pedido } from '../shared/pedido.model'
 })
 export class OrdemCompraComponent implements OnInit {
   public idPedidoCompra: number
+
+  public formulario: FormGroup = new FormGroup({
+    endereco: new FormControl('', [ Validators.required, Validators.minLength(5), Validators.maxLength(120) ]),
+    numero:new FormControl('', [ Validators.required, Validators.minLength(1), Validators.maxLength(10) ]),
+    complemento:new FormControl(''),
+    pagamento:new FormControl('', [ Validators.required ])
+  })
+
 /**
-  * Formulário com template forms
+  * Formulário com reactive forms
   */
-  @ViewChild('formulario') public formulario: NgForm
 
   constructor(private ordemCompraService: OrdemCompraService) { }
 
@@ -22,11 +29,12 @@ export class OrdemCompraComponent implements OnInit {
   }
 
   public confirmaCompra(): void {
+    const valores = this.formulario.value
     let pedido = new Pedido(
-      this.formulario.value.endereco,
-      this.formulario.value.numero,
-      this.formulario.value.complemento,
-      this.formulario.value.pagamento
+      valores.endereco,
+      valores.numero,
+      valores.complemento,
+      valores.pagamento
     )
 
     this.ordemCompraService.efetivarCompra(pedido).subscribe((idPedido: number) => {
