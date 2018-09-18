@@ -241,6 +241,65 @@
       "complemento": "",
       "formaPagamento": "dinheiro",
       "id": 8
+    },
+    {
+      "endereco": "erarararaer",
+      "numero": "23",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 9
+    },
+    {
+      "endereco": "sadsadasdasd",
+      "numero": "23",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 10
+    },
+    {
+      "endereco": "asdasd",
+      "numero": "12",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 11
+    },
+    {
+      "endereco": "xcvxccvxcvxcv",
+      "numero": "34",
+      "complemento": "",
+      "formaPagamento": "debito",
+      "itens": [
+        {
+          "id": 4,
+          "img": {
+            "url": "/assets/ofertas/4/img1.jpg"
+          },
+          "titulo": "Estância das águas",
+          "descricaoOferta": "Diversão garantida com piscinas, trilhas e muito mais.",
+          "valor": 31.9,
+          "quantidade": 2
+        }
+      ],
+      "id": 12
+    },
+    {
+      "endereco": "rasddfasdf",
+      "numero": "34",
+      "complemento": "",
+      "formaPagamento": "debito",
+      "itens": [
+        {
+          "id": 4,
+          "img": {
+            "url": "/assets/ofertas/4/img1.jpg"
+          },
+          "titulo": "Estância das águas",
+          "descricaoOferta": "Diversão garantida com piscinas, trilhas e muito mais.",
+          "valor": 31.9,
+          "quantidade": 3
+        }
+      ],
+      "id": 13
     }
   ]
 }

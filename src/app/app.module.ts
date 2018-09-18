@@ -7,6 +7,8 @@ import { registerLocaleData } from "@angular/common";
 import localePt from "@angular/common/locales/pt";
 registerLocaleData(localePt);
 
+import { CarrinhoService } from './services/carrinho.service'
+
 import { ROUTES as rotas } from './app.routes'
 
 import { AppComponent } from './app.component';
@@ -18,10 +20,10 @@ import { DiversaoComponent } from './diversao/diversao.component';
 import { OfertaComponent } from './oferta/oferta.component';
 import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
-
-import { DescricaoReduzida } from './util/desc-reduzida.pipe';
 import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
 import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component'
+
+import { DescricaoReduzida } from './util/desc-reduzida.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,7 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
     ReactiveFormsModule,
     RouterModule.forRoot(rotas)
   ],
-  providers: [ {provide: LOCALE_ID, useValue: 'pt-Br'} ],
+  providers: [ {provide: LOCALE_ID, useValue: 'pt-Br'}, CarrinhoService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
